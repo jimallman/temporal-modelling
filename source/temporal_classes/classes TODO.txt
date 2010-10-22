@@ -1,0 +1,230 @@
+TODO:
+
+...- Modify the TemporalModel class to be strictly transient (or
+not a class at all);
+  if models manifest at all, they're strictly for
+loading a layer-set into the 
+  Play Space--or saving a layer-set out of
+the Play Space. So what does it do?
+	- Reconcile IDs from an incoming
+model to avoid conflicts with 
+	  existing objects in the Play Space
+
+- When saving, determine which temporal objects can be saved, which are
+
+left behind, and what fragments of the existing temporal structures
+
+can be preserved
+
+
+- Store and manage one or more inflections on
+temporal objects
+	- Within stored XML:
+		<Instant ...>
+
+<inflections>
+				<cancelled/>
+				<mood
+type="circulating" strength="0.8">
+			</inflections>
+
+</Instant>
+
+	- Within the live object (an array of simple objects, name
++ optional params
+		Instant.inflections = [ 
+
+{name:'cancelled'},
+			{name:'mood', type:'circulating',
+strength:0.8}
+		];
+
+- What are the constraints on inflections?
+	-
+Only one semantic inflection per object? (seems too limiting)
+	- Only one
+of each *type* of inflection? (e.g. circulating mood, or any mood)
+	-
+Limit participation in syntactic inflections as well? Can't be target of >
+4...?
+	- Logic and display should properly be based on these
+constraints!!
+	- How can we handle awkward stacking issues, e.g. a Point
+with several semantic inflections?
+
+- Methods for loading from, and
+saving to, XML
+	- Does each class have specific behavior to handle its
+own stuff? 
+	- OR, if that's not realistic for a complex network of
+relations etc, \
+	  then it might be the talent of a special freeze/thaw
+object (DataManager?)
+	- OR, we include classes for relations too, so each
+class has its own
+	  freeze/thaw behavior, but they're all tickled by a
+central manager
+	  that buzzes through the temporal object registry
+tapping everybody 
+	  exactly once. NOTE that the reverse is required
+when loading: to parse
+	  and inspect all the itemss in the XML (whose
+layers match the chosen 
+	  set), then create the required objects in
+Flash, knitting together the 
+	  larger structures along the way.
+	
+-
+Allow for live source XML, or just text? Parse and validate in
+GenericTemporalObject()
+    only if necessary
+
+- Orderly REMOVAL of
+objects, with cleanup of all lingering connections?
+
+- More elegant
+solution for View parameters (object size, placement, overall layout)?
+
+Right now, they're all gummed up with temporal data; perhaps a View object,
+or
+    rules for a View? Somewhere along the way, we have to support the
+notion of
+    authorial or editorial prerogative, in addition to robust
+shared data..
+
+- Add "assert()" function?
+- Error object or collection,
+with centralized reporting?
+
+- Include generic Register(), UnRegister()
+methods? This would allow quick retrieval of any
+	desired object by its
+ID...
+
+- Needed classes and methods, etc.:
+
+Model
+	AddAxis
+
+RemoveAxis
+	AddEvent
+	RemoveEvent
+	AddView
+
+Instant
+
+AddForeshadowing( direction?, targetObject, strength )
+
+RemoveForeshadowing
+	???
+
+
+
+
+-----------------------------------------
+Objects, prototypes, and
+class heirarchies
+-----------------------------------------
+
+Q: Can we
+use the Object.watch( ) method to make "smart properties" in our
+objects?
+This JS 1.5 feature essentially monitors a specified property of
+the object, so that if
+someone tries to set it, a function is called for
+validation, etc. SWEET!
+A: No, it seems that this is Netscape-only
+functionality. And it definitely didn't work in Flash
+
+
+Q: What is
+'prototype' versus '__proto__'?
+A: <object>.prototype is used to set the
+value of the built-in __proto__ property
+   of all JS objects. This is a
+pointer to its "parent" in the prototype chain, which
+   continues upward
+until we get to the initial prototype, whose __proto__ is null
+So why are
+there two different words? Not sure... Keep re-reading this page:
+
+http://developer.netscape.com/docs/manuals/communicator/jsobj/contents.htm#1044609
+
+
+Can
+we assign an object (of one 'class') to be the prototype of another?
+Yes:
+
+// here's a funky constructor function. we'll pass in multiple
+arguments,
+// some of which will be applied as properties in this class,
+others which
+// will be passed back to our "super-class"
+constructors
+function Engineer (name, projs, mach) {
+	// in order to
+inherit particular values in the properties of our base class,
+	// we
+need to adopt its constructor as a method of Engineer
+	this.base =
+WorkerBee;
+
+	// here's the tricky part.. by making WorkerBee a method,
+we auto-magically
+	// pass the 'this' keyword into its constructor, and
+voila! 'this' has the properties
+	// of a new WorkerBee
+	this.base(name,
+"engineering", projs);
+
+	// now apply the third argument (if present) to
+a property of Engineer
+	this.projects = mach || "";	// uses default if
+no value provided
+}
+// Now we'll set its "parent" (initial prototype),
+which is a new instance of WorkerBee
+Engineer.prototype = new
+WorkerBee;
+
+// make a new Engineer (inherits properties etc from
+WorkerBee)
+jane = new Engineer("Doe, Jane", ["navigator", "javascript"],
+"belau");
+
+
+
+
+How can we define properties in a prototype?
+
+//First,
+create the custom object "circle"
+function
+circle(){
+}
+circle.prototype.pi=3.14159
+// create the object
+method
+function
+alertmessage(){
+alert(this.pi)
+}
+circle.prototype.alertpi=alertmessage
+
+
+
+//the
+below creates a new object, and gives it the two methods defined
+earlier
+function circle(r){
+    //property that stores the radius 
+
+this.radius=r;
+    this.area=computearea;
+
+this.diameter=computediameter;
+}
+
+Interesting details on building
+"class" hierarchies in Javascript here:
+http://developer.netscape.com/docs/manuals/communicator/jsobj/contents.htm
