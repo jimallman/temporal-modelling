@@ -1,0 +1,23 @@
+Temporal Modelling
+Copyright 2010 by the Rector and Visitors of the University of Virginia
+
+This product also includes the following third-party components:
+
+ * Calendar Converter (http://www.fourmilab.ch/documents/calendar/)
+   Written by John Walker and placed in the public domain.
+
+All other code written by Jim Allman <jim@ibang.com>
+
+
+The original Temporal Modelling project was built in collaboration with Dr.
+Johanna Drucker and Bethany Nowviskie of SpecLab (the Speculative Computing
+Lab) at the University of Virginia. Petra Michel, then a student at CalArts,
+contributed some graphic design elements in the PlaySpace.
+
+The work was sponsored by a generous grant from the Intel Corporation. For more
+information, see the project home page at 
+ http://www2.iath.virginia.edu/time/project/
+
+...or, in the event that page is offline, try the wiki on Github:
+ http://github.com/jimallman/temporal-modelling/wiki
+ 
