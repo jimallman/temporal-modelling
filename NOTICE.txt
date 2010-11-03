@@ -9,8 +9,8 @@ This product also includes the following third-party components:
 All other code written by Jim Allman <jim@ibang.com>
 
 
-The original Temporal Modelling project was built in collaboration with Dr.
-Johanna Drucker and Bethany Nowviskie of SpecLab (the Speculative Computing
+The original Temporal Modelling project was built in collaboration with 
+Dr. Johanna Drucker and Dr. Bethany Nowviskie of SpecLab (the Speculative Computing
 Lab) at the University of Virginia. Petra Michel, then a student at CalArts,
 contributed some graphic design elements in the PlaySpace.
 
