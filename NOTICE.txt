@@ -6,7 +6,12 @@ This product also includes the following third-party components:
  * Calendar Converter (http://www.fourmilab.ch/documents/calendar/)
    Written by John Walker and placed in the public domain.
 
-All other code written by Jim Allman <jim@ibang.com>
+ * XML-RPC Flash Lib V 1.02
+   Created By: Pedro Ornelas (killer@netmadeira.com)
+   Based on Dave Winer's XML-RPC Specification
+
+All other code written by Jim Allman <jim@ibang.com>, who also modified both
+of the components above for this project.
 
 
 The original Temporal Modelling project was built in collaboration with 
